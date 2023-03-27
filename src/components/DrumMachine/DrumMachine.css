@@ -1,0 +1,100 @@
+#drum-machine{
+   display:flex; 
+  outline: 5px solid orange;
+    position: relative;
+    width: 660px;
+    text-align: center;
+    background-color: #b3b3b3;
+}
+
+#drum-keys{
+  width: 332px;
+  height: 272px;
+  margin: 20px;
+}
+
+#drum-controls{
+  width: 240px;
+    height: 272px;
+    display: flex;
+    margin: 40px 20px 0 10px;
+    vertical-align: top;
+}
+
+.control{
+  width: 100px;
+  margin: auto;
+}
+
+#display{
+    width: 180px;
+    background-color: gray;
+    margin: 15px auto;
+    padding: 5px 0px;
+    box-sizing: border-box;
+    display: block;
+    font-size:10px;
+}
+
+.drum-pad{
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 80px;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding-top: 35px;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: grey;
+  margin-top: 10px;
+  box-shadow: black 3px 3px 5px;
+}
+
+.highlight{
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 80px;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding-top: 35px;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: orange;
+  margin-top: 10px;
+  box-shadow: black 3px 3px 5px;
+  transform:scale(0.95);
+}
+
+
+.select{
+  margin: auto;
+    border: 1px solid black;
+    width: 50px;
+    height: 20px;
+    padding: 1px;
+    background-color: black;
+}
+
+.inner{
+  width: 23px;
+    height: 19px;
+    background: blue;
+    border: 1px solid black;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+#volume{
+
+/*   -webkit-appearance: none; */
+    margin: 12.5px 0;
+    width: 100%;
+    appearance: auto;
+    cursor: pointer;
+    color: (rgb(16, 16, 16), rgb(255, 255, 255));
+    padding: initial;
+    border: initial;
+    margin: 2px;
+}
