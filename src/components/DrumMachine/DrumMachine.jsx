@@ -1,5 +1,5 @@
 import "./DrumMachine.css"
-import {useEffect} from 'react'
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { handlePower, handleVolume, handleBank, handleDisplay } from '../.././store/drum/drum.jsx'
 
@@ -76,8 +76,8 @@ export const DrumMachine = () => {
   const dispatch = useDispatch()
 
   const trigger = (e) => {
-    e.target.className="highlight"
-    setTimeout(()=>e.target.className="drum-pad",100)
+    e.target.className = "highlight"
+    setTimeout(() => e.target.className = "drum-pad", 100)
     if (drum.power) {
       const audio = e.target.firstElementChild
       audio.volume = drum.volume / 100
@@ -98,32 +98,37 @@ export const DrumMachine = () => {
     if (css.float === "left") css.float = "right"
     else css.float = "left"
 
-    if (e.target.id == "power-btn") { dispatch(handlePower()); dispatch(handleDisplay("---")) }
-    else if (e.target.id == "bank-btn") {dispatch(handleBank());dispatch(handleDisplay("Smooth Piano Kit"));}
+    if (e.target.id == "power-btn") { dispatch(handlePower()); dispatch(handleDisplay("---")); }
+    else if (e.target.id == "bank-btn") { dispatch(handleBank()); dispatch(handleDisplay("Smooth Piano Kit")); }
+    document.addEventListener("keypress", eventListen)
   }
 
-  const eventListen=(e)=>{
-    try{
-      const key=e.key.toUpperCase()
+  const eventListen = (e) => {
+    try {
+      const key = e.key.toUpperCase()
       let id
-      beats.forEach((item)=>{
-        if(item.keyN===key) id=item.name
+      beats.forEach((item) => {
+        if(key===item.keyN&&!drum.bank) id=item.name
+        else if(key===item.keyN&&drum.bank) id=item.altName
       })
-      const event=new Event("click",{bubbles:true,cancelable:false})
+      const event = new Event("click", { bubbles: true, cancelable: false })
       document.getElementById(id).dispatchEvent(event)
-    }catch(e){} 
+    } catch (e) { }
   }
 
-   useEffect(()=>{
-    window.addEventListener("keydown",eventListen)
-  },[])
+  useEffect(() => {
+        window.addEventListener('keydown', eventListen);
+        return () => {
+            window.removeEventListener('keydown', eventListen);
+        }
+    })
 
   return (
     <div id={"drum-machine"}>
       <div id={"drum-keys"}>
         {
           beats.map((item, index) => {
-            return (<div key={index} id={(drum.bank) ? item.altName : item.name} className={"drum-pad"} onClick={trigger} onKeyDown={(e)=>{e.target.className="highlight"}}>{item.keyN}
+            return (<div key={index} id={(drum.bank) ? item.altName : item.name} className={"drum-pad"} onClick={trigger} onKeyDown={(e) => { e.target.className = "highlight" }}>{item.keyN}
               <audio id={item.keyN} className={"clip"} src={(drum.bank) ? item.altLink : item.link}></audio>
             </div>)
           })
